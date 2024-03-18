@@ -1,7 +1,7 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 
 int main(void)
 {
-	// �Ƹ��ٿ� ������ ǥ���ϰ� �;���
-	printf("�ȳ� ����� \n");
+	// 아름다운 세상을 표현하고 싶었다
+	printf("안녕 세상아 \n");
 }
