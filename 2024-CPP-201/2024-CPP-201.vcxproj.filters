@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="02-02 함수 오버로딩.cpp">
+    <ClCompile Include="pointer\포인터 기초.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
