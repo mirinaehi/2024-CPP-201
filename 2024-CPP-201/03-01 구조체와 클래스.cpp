@@ -17,6 +17,11 @@ public:
 		hakbun_ = 2121;
 		name_ = "JWP";
 	}
+
+	// 객체의 멤버를 출력하는 함수
+	void print(void) {
+		cout << hakbun_ << " " << name_ << endl;
+	}
 private:
 	
 	int hakbun_;
@@ -27,4 +32,7 @@ void main(void)
 {
 	Student juyoung = Student(2115, "윤주영");
 	Student jwp = Student();
+
+	juyoung.print();
+	jwp.print();
 }
