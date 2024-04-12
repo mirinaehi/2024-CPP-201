@@ -30,9 +30,14 @@ private:
 
 void main(void)
 {
-	Student juyoung = Student(2115, "윤주영");
+	// 동적할당 : heap 영역에 할당. 실행시간(run time)에 메모리 크기 결정
+	Student* juyoung = new Student(2115, "윤주영");
+	// 정적할당 : stack 영역에 할당. 컴파일 시간에 메모리 크기 결정
 	Student jwp = Student();
 
-	juyoung.print();
+	(*juyoung).print();
 	jwp.print();
+
+	// 동적할당된 메모리 해제
+	delete juyoung;
 }
