@@ -13,6 +13,7 @@ public:
 		name_ = new char[18];
 		// 동적할당된 위치(name_)에 "윤주영"(name)을 복사한다
 		strcpy(name_, name);
+		cout << "생성자 호출 완료" << endl;
 	}
 
 	Student() {}
@@ -21,6 +22,7 @@ public:
 	~Student()
 	{
 		delete []name_;
+		cout << "소멸자 호출 완료" << endl;
 	}
 
 	void print(void) {
@@ -35,7 +37,10 @@ private:
 void main(void)
 {
 	Student* stu = new Student(2115, (char*)"윤주영");
-	stu->print();
+	
+	cout << "사필규정" << endl; // 최규정 선생님 짱짱짱 
 
 	delete stu;
+
+	cout << "고진감래" << endl; // 박성래 선생님 zㅣ존
 }
