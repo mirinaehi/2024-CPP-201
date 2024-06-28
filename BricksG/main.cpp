@@ -4,25 +4,30 @@
 // Ball 클래스 정의
 class Ball {
 public:
-    sf::CircleShape shape;
-    sf::Vector2f velocity;
+    sf::CircleShape shape;  // 공의 외형
+    sf::Vector2f velocity;  // 공의 속도
 
     Ball(float mX, float mY) {
         shape.setPosition(mX, mY);
         shape.setRadius(10.f);
-        shape.setFillColor(sf::Color::Red);
+        shape.setFillColor(sf::Color::Magenta);
         shape.setOrigin(10.f, 10.f);
         velocity = { -8.f, -8.f };
     }
 
     void update() {
-        shape.move(velocity);
+        // 공을 움직이게 함
+         shape.move(velocity);
 
-        if (left() < 0) velocity.x = 8.f;
-        else if (right() > 800) velocity.x = -8.f;
+        if (left() < 0) 
+            velocity.x = 8.f;
+        else if (right() > 800) 
+            velocity.x = -8.f;
 
-        if (top() < 0) velocity.y = 8.f;
-        else if (bottom() > 600) velocity.y = -8.f;
+        if (top() < 0) 
+            velocity.y = 8.f;
+        else if (bottom() > 600) 
+            velocity.y = -8.f;
     }
 
     float left() { return shape.getPosition().x - shape.getRadius(); }
@@ -43,10 +48,11 @@ public:
         shape.setPosition(mX, mY);
         shape.setSize({ paddleWidth, paddleHeight });
         shape.setFillColor(sf::Color::Blue);
-        shape.setOrigin(paddleWidth / 2.f, paddleHeight / 2.f);
+        shape.setOrigin(paddleWidth / 2.f, paddleHeight / 2.f);     // 기준점을 중심으로
     }
 
     void update() {
+        // 왼쪽 화살표 키를 누르고 && 왼쪽 벽에 닿지 않을 때
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) && left() > 0) {
             shape.move(-paddleVelocity, 0.f);
         }
@@ -83,8 +89,8 @@ const float brickWidth = 60.f;
 const float brickHeight = 20.f;
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Brick Breaker");
-    window.setFramerateLimit(60);
+    sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Brick");
+    window.setFramerateLimit(60);   // 1초에 60 프레임으로 제한
 
     Ball ball(windowWidth / 2, windowHeight / 2);
     Paddle paddle(windowWidth / 2, windowHeight - 50);
@@ -103,9 +109,11 @@ int main() {
                 window.close();
         }
 
+        // update
         ball.update();
         paddle.update();
-
+        
+        // 공과 패들의 충돌처리
         if (ball.shape.getGlobalBounds().intersects(paddle.shape.getGlobalBounds())) {
             ball.velocity.y = -ball.velocity.y;
         }
@@ -117,6 +125,8 @@ int main() {
                 brick.destroyed = true;
             }
         }
+
+        // draw
 
         window.clear();
         window.draw(ball.shape);
