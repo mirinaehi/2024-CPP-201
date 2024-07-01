@@ -72,12 +72,22 @@ class Brick {
 public:
     sf::RectangleShape shape;
     bool destroyed = false;
+    
+    Brick() {
+        shape.setSize({ 60.f, 20.f });
+        shape.setFillColor(sf::Color::Yellow);
+        shape.setOrigin(30.f, 10.f);
+    }
 
     Brick(float mX, float mY) {
         shape.setPosition(mX, mY);
         shape.setSize({ 60.f, 20.f });
         shape.setFillColor(sf::Color::Yellow);
         shape.setOrigin(30.f, 10.f);
+    }
+
+    void setPosition(float mX, float mY) {
+        shape.setPosition(mX, mY);
     }
 };
 
@@ -95,10 +105,10 @@ int main() {
     Ball ball(windowWidth / 2, windowHeight / 2);
     Paddle paddle(windowWidth / 2, windowHeight - 50);
 
-    std::vector<Brick> bricks;
+    Brick bricks[brickRows][brickColumns];
     for (int i = 0; i < brickRows; ++i) {
         for (int j = 0; j < brickColumns; ++j) {
-            bricks.emplace_back((j + 1) * (brickWidth + 10), (i + 1) * (brickHeight + 10));
+            bricks[i][j].setPosition((j + 1) * (brickWidth + 10), (i + 1) * (brickHeight + 10));
         }
     }
 
@@ -118,11 +128,13 @@ int main() {
             ball.velocity.y = -ball.velocity.y;
         }
 
-        for (auto& brick : bricks) {
-            if (brick.destroyed) continue;
-            if (ball.shape.getGlobalBounds().intersects(brick.shape.getGlobalBounds())) {
-                ball.velocity.y = -ball.velocity.y;
-                brick.destroyed = true;
+        for (int i = 0; i < brickRows; i++) {
+            for (int j = 0; j < brickColumns; j++) {
+                if (bricks[i][j].destroyed) continue;
+                if (ball.shape.getGlobalBounds().intersects(bricks[i][j].shape.getGlobalBounds())) {
+                    ball.velocity.y = -ball.velocity.y;
+                    bricks[i][j].destroyed = true;
+                }
             }
         }
 
@@ -131,9 +143,11 @@ int main() {
         window.clear();
         window.draw(ball.shape);
         window.draw(paddle.shape);
-        for (auto& brick : bricks) {
-            if (!brick.destroyed)
-                window.draw(brick.shape);
+        for (int i = 0; i < brickRows; i++) {
+            for (int j = 0; j < brickColumns; j++) {
+                if (!bricks[i][j].destroyed)
+                    window.draw(bricks[i][j].shape);
+            }
         }
         window.display();
     }
