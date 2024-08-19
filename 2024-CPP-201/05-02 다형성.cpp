@@ -35,7 +35,27 @@ private:
 
 class Human : public Animal {
 public:
+	// 부모(Animal) 생성자가 먼저 호출된다
+	Human(string name, unsigned int age, bool right)
+		: Animal(name, age), right_(right)
+	{
+		cout << "인권존재여부 " << right_ << endl;
+	}
 
+	void bark()
+	{
+		cout << "톡톡" << endl;
+	}
+
+	void sleep()
+	{
+		cout << "쿨쿨" << endl;
+	}
+
+	void eat()
+	{
+		cout << "얌얌" << endl;
+	}
 private:
 	bool right_;
 };
@@ -48,5 +68,12 @@ void main(void)
 	ani->eat();
 	ani->sleep();
 
+	Human* hum = new Human("지혜레이디", 18, true);
+	hum->bark();
+	hum->eat();
+	hum->sleep();
+
+
+	delete hum;
 	delete ani;
 }
