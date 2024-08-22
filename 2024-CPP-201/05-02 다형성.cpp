@@ -12,17 +12,17 @@ public:
 		cout << "이름 " << name_ << endl;
 		cout << "나이 " << age_ << endl;
 	}
-	void bark() 
+	virtual void bark() 
 	{
 		cout << "잘 짖는다" << endl;
 	}
 
-	void sleep()
+	virtual void sleep()
 	{
 		cout << "잘 잔다" << endl;
 	}
 
-	void eat()
+	virtual void eat()
 	{
 		cout << "잘 먹는다" << endl;
 	}
@@ -72,7 +72,6 @@ void main(void)
 
 	// ani의 자료형은 Animal*
 	ani = new Human("지혜레이디", 18, true);
-	// 정적 바인딩으로 인해 Animal의 멤버함수가 호출된다
 	ani->bark();
 	ani->eat();
 	ani->sleep();
