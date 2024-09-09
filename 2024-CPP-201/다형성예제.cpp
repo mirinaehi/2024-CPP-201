@@ -33,7 +33,9 @@ public:
 	Hanbok(string name, int price, int making_time, int beauty
 		, int norigae, int jugori)
 		: Clothes(name, price, making_time, beauty), norigae_(norigae), jugori_(jugori)
-	{}
+	{
+		attack_count_ = 0;
+	}
 
 	void show()
 	{
@@ -42,11 +44,20 @@ public:
 		cout << "저고리 : " << jugori_ << endl;
 	}
 
-	void attack(Clothes* target)
+	void attack(Clothes* target) override
 	{
-		target->beauty_ -= beauty_;
+		// TODO : 매 3타마다 치명타를 주기
+		attack_count_++;
+		if (attack_count_ == 3)
+		{
+			target->beauty_ -= beauty_ * 2;
+			attack_count_ = 0;
+		}
+		else
+			target->beauty_ -= beauty_;
 	}
 
+	int attack_count_;		// 공격횟수
 	int norigae_;			// 노리개
 	int jugori_;			// 저고리
 };
@@ -63,7 +74,7 @@ public:
 		cout << "오비 : " << belt_ << endl;
 	}
 
-	void attack(Clothes* target)
+	void attack(Clothes* target) override
 	{
 		target->beauty_ -= beauty_;
 	}
@@ -83,7 +94,7 @@ public:
 		cout << "자수 : " << embroidery_  << endl;
 	}
 
-	void attack(Clothes* target)
+	void attack(Clothes* target) override
 	{
 		target->beauty_ -= beauty_;
 	}
