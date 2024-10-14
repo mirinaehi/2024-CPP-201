@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="08-01 vector.cpp">
+    <ClCompile Include="09-04 static.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
